@@ -76,8 +76,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\Test\Scripts\Camera_Move.cs" />
+    <Compile Include="Assets\Test\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Test\Scripts\Character\Character_Input.cs" />
+    <Compile Include="Assets\Test\Scripts\Character\Character_Movement.cs" />
+    <Compile Include="Assets\Test\Scripts\TestManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
