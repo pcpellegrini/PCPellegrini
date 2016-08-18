@@ -7,16 +7,17 @@ public class Character_Input : MonoBehaviour
     public Character character;
 
 	void Update () {
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && character.isGrounded)
         {
             character.charMovement.Jump();
         }
-        if (Input.GetButtonDown("Horizontal"))
+        float __dir = Input.GetAxisRaw("Horizontal"); ;
+        if (__dir != 0)
         {
             character.isMoving = true;
-            character.charMovement.direction = Input.GetAxisRaw("Horizontal");
+            character.charMovement.direction = __dir;
         }
-        if (Input.GetButtonUp("Horizontal") && Input.GetAxisRaw("Horizontal") == 0)
+        else if (character.isMoving)
         {
             character.isMoving = false;
         }

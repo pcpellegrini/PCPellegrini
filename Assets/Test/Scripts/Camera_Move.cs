@@ -9,25 +9,22 @@ public class Camera_Move : MonoBehaviour {
 
     private int _currentPath = 0;
     private int _nextPath;
+    private float _currentPathPercent = 0.0f; // min 0, max 1
 
-    void FixedUpdate()
+    public void Initialize()
     {
-        if (character.isMoving)
-        {
-            iTween.Resume();
-            if (_currentPath == _nextPath)
-            {
-                _nextPath++;
-                iTween.MoveTo(gameObject, iTween.Hash("position", paths[_nextPath].position, "speed", 10, "easeType", "linear"));
-            }
-            if (paths[_nextPath].position.x <= transform.position.x)
-            {
-                _currentPath = _nextPath;
-            }
-        }
-        else
-        {
-            iTween.Pause();
-        }
+
+    }
+
+    void Update()
+    {
+        float __off = paths[paths.Length - 1].position.x - paths[0].position.x;
+        _currentPathPercent = ((character.transform.position.x - paths[0].position.x) / __off);
+        iTween.PutOnPath(gameObject, paths, _currentPathPercent);
+    }
+
+    void OnDrawGizmos()
+    {
+        iTween.DrawPath(paths);
     }
 }

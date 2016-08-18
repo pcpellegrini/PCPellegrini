@@ -8,8 +8,8 @@ public class Character : MonoBehaviour {
     public Rigidbody charRB;
     public Camera mainCam;
 
-    [HideInInspector]
-    public bool isMoving;
+    [HideInInspector] public bool isMoving;
+    [HideInInspector] public bool isGrounded;
 
 
     void Start()
@@ -20,9 +20,10 @@ public class Character : MonoBehaviour {
     void Initialize()
     {
         Debug.Log(mainCam.gameObject.name);
-        /*Camera_Move __camCS = mainCam.gameObject.GetComponent<Camera_Move>();
+        Camera_Move __camCS = mainCam.gameObject.GetComponent<Camera_Move>();
         __camCS.character = this;
-        __camCS.enabled = true;*/
+        __camCS.enabled = true;
+        __camCS.Initialize();
         charMovement.mainRB = charRB;
         charMovement.character = this;
         charInput.character = this;
