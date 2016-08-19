@@ -56,7 +56,6 @@ public class Character_Movement : MonoBehaviour {
         {
             CheckGroundStatus();
             _lastYVelocity = mainRB.velocity.y;
-            Debug.Log(character.isGrounded);
         }
     }
 
@@ -66,8 +65,6 @@ public class Character_Movement : MonoBehaviour {
 #if UNITY_EDITOR
         Debug.DrawLine(transform.position + (Vector3.up * _offsetY), transform.position + (Vector3.up * _offsetY) + (Vector3.down * groundCheckDistance));
 #endif
-        // 0.1f is a small offset to start the ray from inside the character
-        // it is also good to note that the transform position in the sample assets is at the base of the character
         if (Physics.Raycast(transform.position + (Vector3.up * _offsetY), Vector3.down, out hitInfo, groundCheckDistance))
         {
             character.isGrounded = true;
