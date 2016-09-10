@@ -36,6 +36,5 @@ public class Character : MonoBehaviour {
         charInput.character = this;
         charInput.enabled = true;
         charMovement.enabled = true;
-        
     }
 }

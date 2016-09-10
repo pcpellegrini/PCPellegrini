@@ -2,12 +2,10 @@
 using System.Collections;
 
 public class Character_Movement : MonoBehaviour {
-
     public float maxSpeed = 10f;
     public float acceleration = 0.5f;
     public float impulseForce = 600f;
     public float groundCheckDistance = 0.1f;
-
     [HideInInspector] public float currentSpeed = 0f;
     [HideInInspector] public float speedMultiplier = 1f;
     [HideInInspector] public float direction;
