@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Camera_Spot : MonoBehaviour {
-
+    
     public bool changeCharVelocity;
     public float newVelocity;
     public bool changeCharCondition;

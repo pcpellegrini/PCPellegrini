@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Character_Movement : MonoBehaviour {
+
     public float maxSpeed = 10f;
     public float acceleration = 0.5f;
     public float impulseForce = 600f;

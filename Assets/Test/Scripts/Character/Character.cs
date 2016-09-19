@@ -26,7 +26,6 @@ public class Character : MonoBehaviour {
 	
     void Initialize()
     {
-        Debug.Log(mainCam.gameObject.name);
         Camera_Move __camCS = mainCam.gameObject.GetComponent<Camera_Move>();
         __camCS.character = this;
         __camCS.enabled = true;
