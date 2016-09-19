@@ -13,7 +13,7 @@ public class Camera_Spot : MonoBehaviour {
 
     }
 
-    public void SpotAction(Character p_char)
+    public void SpotAction(Character p_char, Camera_Move p_cam)
     {
         if(changeCharVelocity)
         {
@@ -22,6 +22,15 @@ public class Camera_Spot : MonoBehaviour {
         if(changeCharCondition)
         {
             p_char.condition = newCondition;
+            switch(newCondition)
+            {
+                case Character.CONDITIONS.SCARED:
+                    p_cam.Animate(Camera_Move.CAM_AIMATIONS.SHAKE);
+                    break;
+                case Character.CONDITIONS.NORMAL:
+                    p_cam.Animate(Camera_Move.CAM_AIMATIONS.IDLE);
+                    break;
+            }
         }
     }
 

@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class Camera_Move : MonoBehaviour {
 
+    public enum CAM_AIMATIONS
+    {
+        SHAKE,
+        IDLE
+    }
     public Transform[] paths;
     public Transform[] targetPaths;
     public GameObject camTarget;
@@ -14,12 +19,16 @@ public class Camera_Move : MonoBehaviour {
     private int _currentTargetPath;
     private int _nextPath;
     private int _nextTargetPath;
+    private int _animHashShake;
     private float _currentPathPercent = 0.0f; // min 0, max 1
     private float _currentTargetPathPercent = 0.0f; // min 0, max 1
     private List<Camera_Spot> spots = new List<Camera_Spot>();
+    private Animator _anim;
 
     public void Initialize()
     {
+        _anim = gameObject.GetComponent<Animator>();
+        _animHashShake = Animator.StringToHash("State_Scared");
         _nextPath = _currentPath++;
         _nextTargetPath = _currentTargetPath++;
         foreach(Transform tmp in paths)
@@ -39,11 +48,20 @@ public class Camera_Move : MonoBehaviour {
         if(transform.position.x >= paths[_nextPath].position.x)
         {
             _currentPath = _nextPath;
-            spots[_currentPath].SpotAction(character);
+            spots[_currentPath].SpotAction(character, this);
             if (_nextPath < paths.Length-1)
             {
                 _nextPath++;
             }
+        }
+        else if(transform.position.x <= paths[_currentPath].position.x)
+        {
+            if (_currentPath > 0)
+            {
+                _nextPath = _currentPath;
+                _currentPath--;
+            }
+            spots[_currentPath].SpotAction(character, this);
         }
         if (camTarget.transform.position.x >= targetPaths[_nextTargetPath].position.x)
         {
@@ -53,6 +71,14 @@ public class Camera_Move : MonoBehaviour {
                 _nextTargetPath++;
             }
         }
+        else if (camTarget.transform.position.x <= targetPaths[_currentTargetPath].position.x)
+        {
+            if (_currentTargetPath > 0)
+            {
+                _nextTargetPath = _currentTargetPath;
+                _currentTargetPath--;
+            }
+        }
         transform.LookAt(camTarget.transform);
     }
 
@@ -60,5 +86,18 @@ public class Camera_Move : MonoBehaviour {
     {
         iTween.DrawPath(paths);
         iTween.DrawPath(targetPaths);
+    }
+
+    public void Animate(CAM_AIMATIONS p_anim)
+    {
+        switch(p_anim)
+        {
+            case CAM_AIMATIONS.SHAKE:
+                _anim.SetBool(_animHashShake, true);
+                break;
+            case CAM_AIMATIONS.IDLE:
+                _anim.SetBool(_animHashShake, false);
+                break;
+        }
     }
 }

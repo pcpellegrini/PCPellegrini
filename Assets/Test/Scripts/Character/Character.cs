@@ -8,7 +8,8 @@ public class Character : MonoBehaviour {
         HURT,
         COLD,
         SCARED,
-        TIRED
+        TIRED,
+        NORMAL
     }
     public Character_Input charInput;
     public Character_Movement charMovement;
@@ -26,7 +27,7 @@ public class Character : MonoBehaviour {
 	
     void Initialize()
     {
-        Camera_Move __camCS = mainCam.gameObject.GetComponent<Camera_Move>();
+        Camera_Move __camCS = mainCam.gameObject.transform.root.GetComponent<Camera_Move>();
         __camCS.character = this;
         __camCS.enabled = true;
         __camCS.Initialize();
