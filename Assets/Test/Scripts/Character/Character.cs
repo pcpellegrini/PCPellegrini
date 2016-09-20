@@ -27,10 +27,13 @@ public class Character : MonoBehaviour {
 	
     void Initialize()
     {
-        Camera_Move __camCS = mainCam.gameObject.transform.root.GetComponent<Camera_Move>();
-        __camCS.character = this;
-        __camCS.enabled = true;
-        __camCS.Initialize();
+        if(mainCam != null)
+        {
+            Camera_Move __camCS = mainCam.gameObject.transform.root.GetComponent<Camera_Move>();
+            __camCS.character = this;
+            __camCS.enabled = true;
+            __camCS.Initialize();
+        }
         charMovement.mainRB = charRB;
         charMovement.character = this;
         charInput.character = this;
