@@ -13,6 +13,7 @@ public class Character : MonoBehaviour {
     }
     public Character_Input charInput;
     public Character_Movement charMovement;
+    public Character_WindControl charWind;
     public Rigidbody charRB;
     public Camera mainCam;
     public CONDITIONS condition;
