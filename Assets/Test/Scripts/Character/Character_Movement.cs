@@ -6,7 +6,9 @@ public class Character_Movement : MonoBehaviour {
     public float maxSpeed = 10f;
     public float acceleration = 0.5f;
     public float impulseForce = 600f;
+    public float climbVelocity = 100f;
     public float groundCheckDistance = 0.1f;
+    public float scalableCheckDistance = 0.5f;
     [HideInInspector] public float currentSpeed = 0f;
     [HideInInspector] public float speedMultiplier = 1f;
     [HideInInspector] public float direction;
@@ -14,6 +16,7 @@ public class Character_Movement : MonoBehaviour {
     [HideInInspector] public Rigidbody mainRB;
 
     private float _lastYVelocity = 0f;
+    private float _lastYPosition = 0f;
     private float _offsetY = 0.05f;
 
     public void Initialize()
@@ -23,6 +26,7 @@ public class Character_Movement : MonoBehaviour {
 
     public void Jump()
     {
+        CheckScalable();
         mainRB.AddForce(Vector3.up * impulseForce, ForceMode.Impulse);
         character.isGrounded = false;
     }
@@ -44,9 +48,13 @@ public class Character_Movement : MonoBehaviour {
                 currentSpeed -= acceleration;
             }
         }
+
         float __newSpeed = direction * currentSpeed * speedMultiplier;
-        if (mainRB.velocity.x != __newSpeed)
-            mainRB.velocity = new Vector3(__newSpeed, mainRB.velocity.y, 0f);
+        if (!character.isClimbing && !character.postClimb)
+        {
+            if (mainRB.velocity.x != __newSpeed)
+                mainRB.velocity = new Vector3(__newSpeed, mainRB.velocity.y, 0f);
+        }
     }
 
     void Update()
@@ -55,6 +63,27 @@ public class Character_Movement : MonoBehaviour {
         {
             CheckGroundStatus();
             _lastYVelocity = mainRB.velocity.y;
+        }
+
+        if (transform.position.y < _lastYPosition)
+        {
+            if (character.toClimb && !character.isClimbing)
+            {
+                character.isClimbing = true;
+                character.toClimb = false;
+                mainRB.useGravity = false;
+            }
+            else if (character.postClimb)
+            {
+                character.postClimb = false;
+            }
+        }
+
+        _lastYPosition = transform.position.y;
+        if (character.isClimbing)
+        {
+            mainRB.velocity = new Vector3(0f, climbVelocity, 0f);
+            CheckScalable();
         }
     }
 
@@ -71,6 +100,29 @@ public class Character_Movement : MonoBehaviour {
         else
         {
             character.isGrounded = false;
+        }
+    }
+
+    public void CheckScalable()
+    {
+        RaycastHit hitInfo;
+#if UNITY_EDITOR
+        Debug.DrawLine(transform.position, transform.position + (transform.forward * scalableCheckDistance));
+#endif
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, scalableCheckDistance))
+        {
+            if (hitInfo.collider.gameObject.tag == "Scalable" && !character.isClimbing)
+            {
+                character.toClimb = true;
+            }
+        }
+        else
+        {
+            mainRB.AddForce(Vector3.up * impulseForce/10, ForceMode.Impulse);
+            character.postClimb = true;
+            mainRB.useGravity = true;
+            character.isClimbing = false;
+            character.toClimb = false;
         }
     }
 }

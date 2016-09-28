@@ -20,6 +20,9 @@ public class Character : MonoBehaviour {
 
     [HideInInspector] public bool isMoving;
     [HideInInspector] public bool isGrounded;
+    [HideInInspector] public bool isClimbing;
+    [HideInInspector] public bool toClimb;
+    [HideInInspector] public bool postClimb;
 
     void Start()
     {
