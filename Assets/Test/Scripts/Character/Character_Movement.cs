@@ -21,7 +21,6 @@ public class Character_Movement : MonoBehaviour {
 
     public void Initialize()
     {
-
     }
 
     public void Jump()
@@ -65,6 +64,16 @@ public class Character_Movement : MonoBehaviour {
             _lastYVelocity = mainRB.velocity.y;
         }
 
+        if(character.facingRight && direction < 0 )
+        {
+            character.facingRight = false;
+            iTween.RotateTo(gameObject, iTween.Hash("y", -90,"time", 0.5,"easetype", "easeInOutSine"));
+        }
+        else if(!character.facingRight && direction > 0)
+        {
+            character.facingRight = true;
+            iTween.RotateTo(gameObject, iTween.Hash("y", 90, "time", 0.5, "easetype", "easeInOutSine"));
+        }
         if (transform.position.y < _lastYPosition)
         {
             if (character.toClimb && !character.isClimbing)
@@ -118,7 +127,7 @@ public class Character_Movement : MonoBehaviour {
         }
         else
         {
-            mainRB.AddForce(Vector3.up * impulseForce/10, ForceMode.Impulse);
+            mainRB.AddForce(transform.forward * impulseForce/3, ForceMode.Impulse);
             character.postClimb = true;
             mainRB.useGravity = true;
             character.isClimbing = false;

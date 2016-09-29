@@ -35,7 +35,7 @@ public class Character_WindControl : MonoBehaviour {
         windEnabled = true;
         RaycastHit hitInfo;
         _currentDirection = new Vector3(p_dirH, p_dirV, 0);
-        Vector3 __dir = new Vector3(Mathf.Abs(_currentDirection.x),_currentDirection.y, 0);
+        Vector3 __dir = new Vector3(transform.parent.forward.x, _currentDirection.y, 0);
         Vector3 __pos = transform.position;
 #if UNITY_EDITOR
         Debug.DrawLine(__pos, __pos + (__dir * windDistance), Color.red);

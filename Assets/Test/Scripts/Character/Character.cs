@@ -16,6 +16,7 @@ public class Character : MonoBehaviour {
     public Character_WindControl charWind;
     public Rigidbody charRB;
     public Camera mainCam;
+    public GameObject camGO;
     public CONDITIONS condition;
 
     [HideInInspector] public bool isMoving;
@@ -23,6 +24,7 @@ public class Character : MonoBehaviour {
     [HideInInspector] public bool isClimbing;
     [HideInInspector] public bool toClimb;
     [HideInInspector] public bool postClimb;
+    [HideInInspector] public bool facingRight;
 
     void Start()
     {
@@ -31,6 +33,7 @@ public class Character : MonoBehaviour {
 	
     void Initialize()
     {
+        facingRight = true;
         if(mainCam != null)
         {
             Camera_Move __camCS = mainCam.gameObject.transform.root.GetComponent<Camera_Move>();
