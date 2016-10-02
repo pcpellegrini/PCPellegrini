@@ -125,7 +125,7 @@ public class Character_Movement : MonoBehaviour {
                 character.toClimb = true;
             }
         }
-        else
+        else if(character.isClimbing)
         {
             mainRB.AddForce(transform.forward * impulseForce/3, ForceMode.Impulse);
             character.postClimb = true;
