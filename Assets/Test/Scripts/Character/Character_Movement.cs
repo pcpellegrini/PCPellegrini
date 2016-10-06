@@ -49,7 +49,7 @@ public class Character_Movement : MonoBehaviour {
         }
 
         float __newSpeed = direction * currentSpeed * speedMultiplier;
-        if (!character.isClimbing && !character.postClimb)
+        if (!character.isClimbing && !character.postClimb && !character.isHolding)
         {
             if (mainRB.velocity.x != __newSpeed)
                 mainRB.velocity = new Vector3(__newSpeed, mainRB.velocity.y, 0f);
@@ -64,12 +64,12 @@ public class Character_Movement : MonoBehaviour {
             _lastYVelocity = mainRB.velocity.y;
         }
 
-        if(character.facingRight && direction < 0 )
+        if(character.facingRight && direction < 0 && !character.isHolding)
         {
             character.facingRight = false;
             iTween.RotateTo(gameObject, iTween.Hash("y", -90,"time", 0.5,"easetype", "easeInOutSine"));
         }
-        else if(!character.facingRight && direction > 0)
+        else if(!character.facingRight && direction > 0 && !character.isHolding)
         {
             character.facingRight = true;
             iTween.RotateTo(gameObject, iTween.Hash("y", 90, "time", 0.5, "easetype", "easeInOutSine"));
@@ -89,7 +89,7 @@ public class Character_Movement : MonoBehaviour {
         }
 
         _lastYPosition = transform.position.y;
-        if (character.isClimbing)
+        if (character.isClimbing && !character.isHolding)
         {
             mainRB.velocity = new Vector3(0f, climbVelocity, 0f);
             CheckScalable();

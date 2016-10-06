@@ -75,6 +75,7 @@
     <Compile Include="Assets\Test\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Test\Scripts\Character\Character_Input.cs" />
     <Compile Include="Assets\Test\Scripts\Character\Character_Movement.cs" />
+    <Compile Include="Assets\Test\Scripts\Character\Character_Rope.cs" />
     <Compile Include="Assets\Test\Scripts\Character\Character_WindControl.cs" />
     <Compile Include="Assets\Test\Scripts\TestManager.cs" />
   </ItemGroup>
