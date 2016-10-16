@@ -2,15 +2,7 @@
 using System.Collections;
 
 public class Character : MonoBehaviour {
-
-    public enum CONDITIONS
-    {
-        HURT,
-        COLD,
-        SCARED,
-        TIRED,
-        NORMAL
-    }
+    
     public Character_Input charInput;
     public Character_Movement charMovement;
     public Character_WindControl charWind;
@@ -19,7 +11,7 @@ public class Character : MonoBehaviour {
     public Transform handPosition;
     public Camera mainCam;
     public GameObject camGO;
-    public CONDITIONS condition;
+    public Global_Vars.CONDITIONS condition;
 
     [HideInInspector] public bool isMoving;
     [HideInInspector] public bool isGrounded;

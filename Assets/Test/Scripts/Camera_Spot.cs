@@ -6,7 +6,7 @@ public class Camera_Spot : MonoBehaviour {
     public bool changeCharVelocity;
     public float newVelocity;
     public bool changeCharCondition;
-    public Character.CONDITIONS newCondition;
+    public Global_Vars.CONDITIONS newCondition;
 
     public void Initialize()
     {
@@ -24,10 +24,10 @@ public class Camera_Spot : MonoBehaviour {
             p_char.condition = newCondition;
             switch(newCondition)
             {
-                case Character.CONDITIONS.SCARED:
+                case Global_Vars.CONDITIONS.SCARED:
                     p_cam.Animate(Camera_Move.CAM_AIMATIONS.SHAKE);
                     break;
-                case Character.CONDITIONS.NORMAL:
+                case Global_Vars.CONDITIONS.NORMAL:
                     p_cam.Animate(Camera_Move.CAM_AIMATIONS.IDLE);
                     break;
             }
