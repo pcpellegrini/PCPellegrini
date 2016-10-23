@@ -12,6 +12,7 @@ public class Panda : MonoBehaviour {
     public GameObject camGO;
     public Global_Vars.CONDITIONS condition;
     public NavMeshAgent pandaNavAgent;
+    public LayerMask playerMask;
 
     [HideInInspector]
     public bool isMoving;
@@ -19,10 +20,13 @@ public class Panda : MonoBehaviour {
     public bool isGrounded;
     [HideInInspector]
     public bool facingRight;
+    [HideInInspector]
+    public Global_Vars.PANDA_STATE currentState;
 
     void Start()
     {
         Initialize();
+        currentState = Global_Vars.PANDA_STATE.FOLLOW;
     }
 
     void Initialize()
@@ -33,7 +37,7 @@ public class Panda : MonoBehaviour {
         pandaFollower.panda = this;
         pandaFollower.enabled = true;
         pandaInput.panda = this;
-        pandaInput.enabled = true;
+        //pandaInput.enabled = true;
         pandaMovement.enabled = true;
     }
 }

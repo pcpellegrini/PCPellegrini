@@ -99,6 +99,20 @@ public class Panda_Movement : MonoBehaviour {
         }*/
     }
 
+    public void Turn()
+    {
+        if (panda.facingRight)
+        {
+            panda.facingRight = false;
+            iTween.RotateTo(gameObject, iTween.Hash("y", -90, "time", 0.5, "easetype", "easeInOutSine"));
+        }
+        else if (!panda.facingRight)
+        {
+            panda.facingRight = true;
+            iTween.RotateTo(gameObject, iTween.Hash("y", 90, "time", 0.5, "easetype", "easeInOutSine"));
+        }
+    }
+
     public void CheckGroundStatus()
     {
         RaycastHit hitInfo;

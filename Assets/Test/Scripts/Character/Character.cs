@@ -29,6 +29,7 @@ public class Character : MonoBehaviour {
 	
     void Initialize()
     {
+        Global_Vars.player = this;
         facingRight = true;
         if(mainCam != null)
         {

@@ -11,4 +11,14 @@ public static class Global_Vars {
         TIRED,
         NORMAL
     }
+
+    public enum PANDA_STATE
+    {
+        FOLLOW,
+        HIDE,
+        HELP,
+        RUN
+    }
+
+    public static Character player;
 }
